@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3441/${DB_SCHEMA}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+
+flyway:
+  locations: classpath:versions

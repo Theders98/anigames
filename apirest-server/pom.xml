@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.nica</groupId>
+    <artifactId>anigames</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>apirest-server</artifactId>
+  <packaging>jar</packaging>
+
+<dependencies>
+
+  <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-web</artifactId>
+    <version>${spring-web.version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>com.squareup.okhttp3</groupId>
+    <artifactId>okhttp</artifactId>
+    <version>${okhttp.version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>com.squareup.okhttp3</groupId>
+    <artifactId>logging-interceptor</artifactId>
+    <version>${okhttp-logging.version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>javax.ws.rs</groupId>
+    <artifactId>javax.ws.rs-api</artifactId>
+    <version>${javax-ws-rs.version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>javax.annotation-api</artifactId>
+    <version>${javax-annotation.version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>io.gsonfire</groupId>
+    <artifactId>gson-fire</artifactId>
+    <version>${gson-fire.version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>com.google.code.findbugs</groupId>
+    <artifactId>jsr305</artifactId>
+    <version>${jsr305.version}</version>
+  </dependency>
+  <dependency>
+    <groupId>com.nica</groupId>
+    <artifactId>application</artifactId>
+    <version>1.0.0</version>
+  </dependency>
+</dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>6.3.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <generateModels>true</generateModels>
+              <generateApis>true</generateApis>
+              <apiPackage>com.nica.api</apiPackage>
+              <modelPackage>com.nica.model</modelPackage>
+              <generateApiTests>false</generateApiTests>
+              <generateModelTests>false</generateModelTests>
+              <invokerPackage>com.nica.handler</invokerPackage>
+              <inputSpec>${project.basedir}/src/main/swaggers/Character.yaml</inputSpec>
+              <generatorName>java</generatorName>
+              <configOptions>
+                <sourceFolder>src/gen/java/main</sourceFolder>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

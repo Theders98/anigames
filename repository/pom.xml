@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.nica</groupId>
+        <artifactId>anigames</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>repository</artifactId>
+
+        <properties>
+            <flyway.user>root</flyway.user>
+            <flyway.password>root</flyway.password>
+            <flyway.schemas>anigames</flyway.schemas>
+        </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.nica</groupId>
+            <artifactId>application</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
+    </dependencies>
+<!-- Configuración de flyway en local-->
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
+            <version>8.5.13</version>
+            <configuration>
+                <user>${flyway.user}</user>
+                <password>${flyway.password}</password>
+                <schemas>
+                    <schema>${flyway.schemas}</schema>
+                </schemas>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+
+
+</project>
