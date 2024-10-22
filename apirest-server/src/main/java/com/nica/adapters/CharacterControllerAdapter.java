@@ -1,13 +1,12 @@
 package com.nica.adapters;
 
 import com.nica.api.CharactersApi;
-import com.nica.handler.ApiException;
 import com.nica.mappers.CharacterDTOMapper;
 import com.nica.model.CharacterItem;
+import com.nica.ports.in.CharacterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.nica.ports.in.CharacterService;
 
 import java.util.List;
 
@@ -25,7 +24,8 @@ public class CharacterControllerAdapter extends CharactersApi {
     }
 
     @Override
-    public List<CharacterItem> findAllCharacters() throws ApiException {
-        return super.findAllCharacters();
+    public List<CharacterItem> findAllCharacters() {
+        var characters = characterService.findAllCharacters();
+        return characterDTOMapper.fromList(characters);
     }
 }
