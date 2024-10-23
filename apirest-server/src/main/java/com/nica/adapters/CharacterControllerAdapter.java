@@ -5,13 +5,14 @@ import com.nica.mappers.CharacterDTOMapper;
 import com.nica.model.CharacterItem;
 import com.nica.ports.in.CharacterService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/character")
 @Slf4j
 public class CharacterControllerAdapter extends CharactersApi {
 
@@ -23,7 +24,7 @@ public class CharacterControllerAdapter extends CharactersApi {
         this.characterService = characterService;
     }
 
-    @Override
+    @GetMapping("/test")
     public List<CharacterItem> findAllCharacters() {
         var characters = characterService.findAllCharacters();
         return characterDTOMapper.fromList(characters);

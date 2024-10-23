@@ -1,11 +1,10 @@
-package com.nic.adapters;
+package com.nica.adapters;
 
 import com.nica.domain.Character;
 import com.nica.ports.out.CharacterRepositoryPort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CharacterRepositoryAdapter implements CharacterRepositoryPort {
