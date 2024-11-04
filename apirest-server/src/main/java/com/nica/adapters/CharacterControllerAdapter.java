@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/character")
+@RequestMapping
 @Slf4j
 public class CharacterControllerAdapter extends CharactersApi {
 
@@ -29,4 +29,5 @@ public class CharacterControllerAdapter extends CharactersApi {
         var characters = characterService.findAllCharacters();
         return characterDTOMapper.fromList(characters);
     }
+
 }

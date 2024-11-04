@@ -6,7 +6,3 @@ spring:
 
 flyway:
   locations: classpath:versions
-
-
-server:
-  port: 8080

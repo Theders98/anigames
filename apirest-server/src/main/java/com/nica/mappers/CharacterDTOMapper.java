@@ -11,4 +11,5 @@ public abstract class CharacterDTOMapper {
 
     public abstract CharacterItem from(Character character);
     public abstract List<CharacterItem> fromList(List<Character> characters);
+
 }

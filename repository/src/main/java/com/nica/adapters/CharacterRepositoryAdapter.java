@@ -11,6 +11,7 @@ public class CharacterRepositoryAdapter implements CharacterRepositoryPort {
 
     @Override
     public List<Character> findAllCharacters() {
+
         return List.of();
     }
 
