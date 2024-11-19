@@ -4,12 +4,11 @@
 
   <groupId>com.nica</groupId>
   <artifactId>anigames</artifactId>
-  <version>${application-version}</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>anigames</name>
 
   <properties>
-          <application-version>1.0.0</application-version>
           <maven.compiler.source>17</maven.compiler.source>
           <maven.compiler.target>17</maven.compiler.target>
           <slf4j.version>2.0.7</slf4j.version>
