@@ -1,0 +1,70 @@
+name: Update POM and Merge
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  update-pom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update POM
+        run: |
+          #!/bin/bash
+          get_latest_tag() {
+            latest_tag=$(git describe --tags --abbrev=0)
+            echo "${latest_tag#v}"
+            }
+            
+          get_pr_type() {
+            local branch_name=$(git rev-parse --abbrev-ref HEAD)
+            if [[ $branch_name =~ ^feature/ ]]; then
+              echo "feature"
+            elif [[ $branch_name =~ ^fix/ ]]; then
+              echo "fix"
+            else
+              echo "other"
+            fi
+          }
+
+          latest_version=$(get_latest_tag)
+
+          if [[ -z "$latest_version" ]]; then
+            latest_version="1.0.0"
+          fi
+
+          pr_type=$(get_pr_type)
+
+          IFS=. read -r major minor patch <<< "$latest_version"
+
+          case "$pr_type" in
+            feature)
+              ((minor++))
+                  ;;
+            fix)
+              ((patch++))
+            ;;
+            *)
+              echo "Tipo de PR no reconocido. Incrementando el parche."
+                ((patch++))
+              ;;
+            esac
+
+          new_version="$major.$minor.$patch"
+
+          sed -i "s/<version>.*<\/version>/<version>$new_version<\/version>/g" pom.xml
+
+          git tag -a "v$new_version" -m "Version $new_version"
+      
+      - name: Commit changes
+        run: |
+          git config user.name "Patroclo"
+          git add pom.xml
+          git commit -m "Update to version to $new_version"
+          git push origin feature/update-pom
+      - name: Create pull request
+        run: | 
+          git checkout develop
+          git merge feature/update-pom
+          git push origin develop
